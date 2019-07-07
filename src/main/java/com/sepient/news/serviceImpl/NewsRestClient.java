@@ -22,6 +22,11 @@ public class NewsRestClient {
 	String apiKey;
 	
 	
+	/*
+	 * makes rest call to News API for fetching the content
+	 *
+	 */
+	
 	public List<Article> getApiData(String country, String category) {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();

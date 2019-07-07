@@ -1,6 +1,7 @@
 package com.sepient.newsApp;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -33,21 +34,43 @@ public class NewsDescriptionServiceTest {
 	
 	List<Article> articleList= new ArrayList<>();;
 	
+	
+	/*tests for the availability of the keyword*/
 	@Test
-	public void testFilterNews() {
+	public void testFilterNewsWithContentAvailable() {
 	
 		String category = "business";
 		String country = "us";
-		String keyword = "some";
+		String keyword = "test";
+		when(restClient.getApiData(Mockito.anyString(), Mockito.anyString())).thenReturn(articleList);
 		NewsBean newsBean = impl.getContent(category, country, keyword);
-		when(restClient.getApiData("us", "business")).thenReturn(articleList);
 		assertNotNull(newsBean);
-		Mockito.verify(newsBean).getCategory().equals("business");
+		assertNotNull(newsBean.getDescription());
+	}
+	
+	
+	/*tests when keyword is not found in the news items*/
+	@Test
+	public void testFilterNewsWithContentUnAvailable() {
+	
+		String category = "business";
+		String country = "us";
+		String keyword = "123";
+		NewsBean newsBean = impl.getContent(category, country, keyword);
+		when(restClient.getApiData(Mockito.anyString(), Mockito.anyString())).thenReturn(articleList);
+		assertNotNull(newsBean);
+		assertNull(newsBean.getDescription());
 	}
 	
 	@Before
 	public void init() {
 	    MockitoAnnotations.initMocks(this);
+	    
+	    Article article = new Article();
+	    article.setContent("some-content");
+	    article.setDescription("test-description");
+	    article.setTitle("test-title test");
+	    articleList.add(article);
 	}
 	
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.sepient.news.bean.Article;
 import com.sepient.news.bean.NewsBean;
-import com.sepient.news.bean.ResponseBean;
 import com.sepient.news.service.NewsDescriptionI;
 
 @Service
