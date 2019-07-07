@@ -1,7 +1,5 @@
 package com.sepient.news.bean;
 
-import com.sepient.news.constants.Category;
-
 public class NewsBean {
 
 	private String country;
