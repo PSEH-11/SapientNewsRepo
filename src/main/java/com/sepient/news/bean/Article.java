@@ -1,24 +1,27 @@
 package com.sepient.news.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Article {
-	String source;
+//	@JsonProperty("source")
+//	String source;
+	@JsonProperty("author")
 	String author;
+	@JsonProperty("title")
 	String title;
+	@JsonProperty("description")
 	String description;
+	@JsonProperty("url")
 	String url;
+	@JsonProperty("urlToImage")
 	String urlToImage;
+	@JsonProperty("publishedAt")
 	String publishedAt;
+	@JsonProperty("content")
 	String content;
 	
-	public String getSource() {
-		return source;
-	}
-	public void setSource(String source) {
-		this.source = source;
-	}
 	public String getAuthor() {
 		return author;
 	}

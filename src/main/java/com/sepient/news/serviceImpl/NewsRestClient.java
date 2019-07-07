@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.sepient.news.bean.Article;
+import com.sepient.news.bean.ResponseBean;
 
 @Service
 public class NewsRestClient {
@@ -30,7 +31,7 @@ public class NewsRestClient {
 	public List<Article> getApiData(String country, String category) {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Accept", "application/json");
+		headers.set("Accept", "application/json;charset=UTF-8");
 		
 		HttpEntity<String> entity = new HttpEntity<>("body", headers);
 		
@@ -39,9 +40,9 @@ public class NewsRestClient {
 		params.put("category", category);
 		params.put("apiKey", apiKey);
 		
-		ResponseEntity<List<Article>> res= restTemplate.exchange("https://newsapi.org/v2/top-headlines?country={country}&category={category}&apiKey={apiKey}", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Article>>() {
-		}, params);
-		return res.getBody();
+		ResponseEntity<ResponseBean> res= restTemplate.exchange("https://newsapi.org/v2/top-headlines?country={country}&category={category}&apiKey={apiKey}", HttpMethod.GET, entity, ResponseBean.class, params);
+		
+		return res.getBody().getArticles();
 				
 	}
 }

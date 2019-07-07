@@ -3,12 +3,14 @@ package com.sepient.news.bean;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseBean {
 
 	String status;
 	String totalResults;
+	@JsonProperty("articles")
 	List<Article> articles;
 	public String getStatus() {
 		return status;
